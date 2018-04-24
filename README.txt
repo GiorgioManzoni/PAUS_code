@@ -13,4 +13,4 @@
      Remember that I am using the production 701 (that is a photoz production) and in this production all the observed paus 
      data belong to the cosmos field (i.e. I am not loosing PAUS data when doing the join with COSMOS).  
 
-008 - 011: comparison of the half-light radius in the following catalogues: COSMOS / CFHTLS-D2 / CFHTLS-D3 / CFHTLenS-W3 in order to understand if CFHTLenS is a good parent catalogue for PAUS (i.e. if it has the same definition of half-light radius as in COSMOS which has already bin used for reducing the PAUS data in the COSMOS field).
+008 - 011: comparison of the half-light radius in the following catalogues: COSMOS / CFHTLS-D2 / CFHTLS-D3 / CFHTLenS-W3 in order to understand if CFHTLenS-W3 is a good parent catalogue for PAUS-W3 (i.e. if it has the same definition of half-light radius as in COSMOS which has already been used for reducing the PAUS data in the COSMOS field).
