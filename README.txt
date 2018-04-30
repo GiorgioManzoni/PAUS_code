@@ -18,3 +18,7 @@
 011: it contains both classes and plots that use those classes and it creates all the useful files that I used as an input to topcat to match objects in overlapping fields. It's a cleaner version of 010 where I avoided to plot things that are not useful.
 
 012: it contains all the classes that I created to manage different surveys. Ideally it would be great to use it as a library and include it in new jupiter files (but first I need to learn how to include a jupyter in another jupyter)
+
+013: Trying to import the classes for all the surveys that I am using directly from a jupyter notebook but it doesn't work for now.
+
+014: Copied by 012. I want to make a comparison between CFHTLS-W3 and CFHTLenS-W3 but I created this new file to keep clear 012 with just the classes and no rubbish. 
