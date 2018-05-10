@@ -23,4 +23,8 @@
 
 013: Trying to import the classes for all the surveys that I am using directly from a jupyter notebook but it doesn't work for now.
 
-014: Copied by 012. I want to make a comparison between CFHTLS-W3 and CFHTLenS-W3 but I created this new file to keep clear 012 with just the classes and no rubbish. 
+014: Copied by 012. I want to make a comparison between CFHTLS-W3 and CFHTLenS-W3 but I created this new file to keep clear 012 with just the classes and no rubbish. In 014 you can find:
+—> The ra/dec plots of W3 with overlapping data from CFHTLS/W3 and CFHTLenS/W3. It can be seen that the masking is very different with Lens escluding lots of galaxies in big holes also around faint stars. Different zooms of the plot and also with a cut at i<23.
+—> example of how to merge an additional column to a table in pandas (in this case I added scalelength to the lens table).
+—> I matched CFHTLS/W3 with CFHTLenS/W3 using topcat (remember to use the option 'topcat -Xmx4096M' to allocate more memory since we are dealing with huge tables). In 014 I just check that the table is readable.
+—> Analysis of FLUX_RADIUS against scalelength (with the good plot that I showed during the meeting in London). It seems that scalelength is the deconvolved version of FLUX_RADIUS but the analytic relation must be found (probably in Hildebrandt+2012).
