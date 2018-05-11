@@ -18,6 +18,7 @@
 011: it contains both classes and plots that use those classes and it creates all the useful files that I used as an input to topcat to match objects in overlapping fields. It's a cleaner version of 010 where I avoided to plot things that are not useful.
 ——> !!! —> IN THE LAST PART OF THE CODE YOU FIND HOW TO QUERY VIZIER WITH PTYHON (…and successfuly get CFHTLS_W3) 
 ————> It also contains the function median_in_bins_err() which compute the median and the desired percentiles as an error bar binning the x-axis.
+—> Analysis of the i'/y' filter (using Ifl that is the flag which identify the filter).
 
 012: it contains all the classes that I created to manage different surveys. Ideally it would be great to use it as a library and include it in new jupiter files (but first I need to learn how to include a jupyter in another jupyter)
 
