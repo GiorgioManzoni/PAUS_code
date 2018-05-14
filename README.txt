@@ -29,3 +29,9 @@
 —> example of how to merge an additional column to a table in pandas (in this case I added scalelength to the lens table).
 —> I matched CFHTLS/W3 with CFHTLenS/W3 using topcat (remember to use the option 'topcat -Xmx4096M' to allocate more memory since we are dealing with huge tables). In 014 I just check that the table is readable.
 —> Analysis of FLUX_RADIUS against scalelength (with the good plot that I showed during the meeting in London). It seems that scalelength is the deconvolved version of FLUX_RADIUS but the analytic relation must be found (probably in Hildebrandt+2012).
+
+015: Meant to be used for reading the new photo-z production 852 from paudm.
+
+016: To be used as a template to merge a new column to an existing table using pandas.
+
+017: The idea is to use the classes from 012 to compare CFHTLS/W3 masking with CFHTLenS/W3 ones. The idea comes from the plot in 014 showing the big holes in LenS that are not present in CFHTLS. Hendrik says that this holes appear just if we select MASK=0 so I want to explore other values of MASK.
