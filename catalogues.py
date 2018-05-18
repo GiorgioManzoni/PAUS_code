@@ -48,7 +48,8 @@ class CFHTLens:
         #load the table locally
         #self.tab = pd.read_table('../data/CFHTLens.tsv')
         #self.tab = pd.read_table('../data/CFHTLens_lotsofcolumns_stars.tsv')
-        self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
+        #self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
+        self.tab = pd.read_csv('../data/LENS_all_MASK.csv')
         #instantiate the properties I need
         self.ra = np.array(self.tab['ALPHA_J2000'])
         self.dec = np.array(self.tab['DELTA_J2000'])
@@ -93,6 +94,8 @@ class CFHTLens:
         self.FWHM_IMAGE_arcsec = self.FWHM_IMAGE_pix*self.arcsec_per_pixel
         self.FWHM_WORLD_deg = np.array(self.tab['FWHM_WORLD']) #the same but degrees
         self.SEEING_from_FWHM = self.FWHM_IMAGE_arcsec*0.5 # sigma = 0.5 FWHM (for a bidimensional gaussian)
+    
+        self.MASK = np.array(self.tab['MASK'])
     
     #useful functions
     def get_tab(self):
@@ -151,7 +154,7 @@ class CFHTLS_DEEP:
 
 
 class CFHTLS_D2:
-    def __init__(self):
+    def __init__(self,cfhtls_d):
         select_D2 = np.where((cfhtls_d.ra>149.)&(cfhtls_d.ra<151.)&(cfhtls_d.dec>1.6)&(cfhtls_d.dec<2.8))
         self.ra = cfhtls_d.ra[select_D2]
         self.dec = cfhtls_d.dec[select_D2]
@@ -224,7 +227,7 @@ class MATCH_COSMOS_CFHTLS_D2:
 #################################################################################
 
 class CFHTLS_D3:
-    def __init__(self):
+    def __init__(self,cfhtls_d):
         select_D3 = np.where((cfhtls_d.ra>200.)&(cfhtls_d.ra<250.)&(cfhtls_d.dec>45.)&(cfhtls_d.dec<60.))
         self.ra = cfhtls_d.ra[select_D3]
         self.dec = cfhtls_d.dec[select_D3]
@@ -240,7 +243,7 @@ class CFHTLS_D3:
 
 
 class LENS_W3:
-    def __init__(self):
+    def __init__(self,cfhtlens):
         select_W3 = np.where((cfhtlens.ra>200.)&(cfhtlens.ra<250.)&(cfhtlens.dec>45.)&(cfhtlens.dec<60.))
         self.ra = cfhtlens.ra[select_W3]
         self.dec = cfhtlens.dec[select_W3]
