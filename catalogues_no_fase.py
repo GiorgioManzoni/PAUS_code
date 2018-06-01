@@ -51,7 +51,8 @@ class CFHTLens:
         #self.tab = pd.read_table('../data/CFHTLens_lotsofcolumns_stars.tsv')
         
 	#self.tab = astro_read('../data/LENS_all_scalelength.csv',format='csv',guess=False,fast_reader=True)#={'chunk_size':100000000})
-	self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')        
+	#self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
+	self.tab = pd.read_csv('../data/LENS_all_bulge.csv')        
 
 	#instantiate the properties I need
         self.ra = np.array(self.tab['ALPHA_J2000'])
@@ -97,6 +98,8 @@ class CFHTLens:
         self.FWHM_IMAGE_arcsec = self.FWHM_IMAGE_pix*self.arcsec_per_pixel
         self.FWHM_WORLD_deg = np.array(self.tab['FWHM_WORLD']) #the same but degrees
         self.SEEING_from_FWHM = self.FWHM_IMAGE_arcsec*0.5 # sigma = 0.5 FWHM (for a bidimensional gaussian) 
+	self.MASK = np.array(self.tab['MASK'])
+	self.bulge_fraction = np.array(self.tab['bulge_fraction'])
         
     #useful functions    
     def get_tab(self):
@@ -248,18 +251,21 @@ class CFHTLS_D3:
 
 class LENS_W3:
     def __init__(self,cfhtlens):
-	print cfhtlens.ra
+        print cfhtlens.ra
         select_W3 = np.where((cfhtlens.ra>200.)&(cfhtlens.ra<250.)&(cfhtlens.dec>45.)&(cfhtlens.dec<60.))
-	print select_W3
+        print select_W3
         self.ra = cfhtlens.ra[select_W3]
         self.dec = cfhtlens.dec[select_W3]
         self.FLUX_RADIUS = cfhtlens.FLUX_RADIUS[select_W3]
         self.MAG_i = cfhtlens.MAG_i[select_W3]
-	self.CLASS_STAR = cfhtlens.CLASS_STAR[select_W3]
-        #self.MASK = cfhtlens.MASK[select_W3]
+        self.CLASS_STAR = cfhtlens.CLASS_STAR[select_W3]
+        self.MASK = cfhtlens.MASK[select_W3]
         self.arcsec_per_pixel = 0.187
         self.FLUX_RADIUS_arcsec = np.array(self.FLUX_RADIUS*self.arcsec_per_pixel)
-	print self.ra
+        self.scalelength = np.array(cfhtlens.scalelength[select_W3])
+        self.scalelength_arcsec = np.array(self.scalelength*self.arcsec_per_pixel)
+        self.bulge_fraction = np.array(cfhtlens.bulge_fraction[select_W3])
+        print self.ra
     def get_cut(self,i_mag_cut=22.5):
         return np.where(self.MAG_i<=i_mag_cut)
 
