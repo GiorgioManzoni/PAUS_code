@@ -49,16 +49,16 @@ class CFHTLens:
         #load the table locally
         #self.tab = pd.read_table('../data/CFHTLens.tsv')
         #self.tab = pd.read_table('../data/CFHTLens_lotsofcolumns_stars.tsv')
-        
-	#self.tab = astro_read('../data/LENS_all_scalelength.csv',format='csv',guess=False,fast_reader=True)#={'chunk_size':100000000})
-	#self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
-	self.tab = pd.read_csv('../data/LENS_all_bulge.csv')        
+        #self.tab = astro_read('../data/LENS_all_scalelength.csv',format='csv',guess=False,fast_reader=True)#={'chunk_size':100000000})
+        #self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
+        #self.tab = pd.read_csv('../data/LENS_all_bulge.csv')
+        self.tab = pd.read_csv('../data/LENS_total_light_AB.csv') # here I deleted some non-used psf columns
 
-	#instantiate the properties I need
+        #instantiate the properties I need
         self.ra = np.array(self.tab['ALPHA_J2000'])
         self.dec = np.array(self.tab['DELTA_J2000'])
         self.MAG_i = np.array(self.tab['MAG_i'])
-           #self.NbFilt = np.array(self.tab['NbFilt'])
+        #self.NbFilt = np.array(self.tab['NbFilt'])
         self.Z_B = np.array(self.tab['Z_B'])
         self.FLUX_RADIUS = np.array(self.tab['FLUX_RADIUS'])
         self.arcsec_per_pixel = 0.187
@@ -78,19 +78,19 @@ class CFHTLens:
           star sample, but can lead to serious incompleteness in a galaxy
           sample.'''
         self.SNratio = np.array(self.tab['SNratio'])
-        self.PSF_e1_pix = np.array(self.tab['PSF_e1'])
-        self.PSF_e2_pix = np.array(self.tab['PSF_e2'])
-        self.PSF_eTOT_pix = np.sqrt(self.PSF_e1_pix**2+self.PSF_e2_pix**2)
-        self.PSF_e1 = self.PSF_e1_pix*self.arcsec_per_pixel
-        self.PSF_e2 = self.PSF_e2_pix*self.arcsec_per_pixel
-        self.PSF_eTOT = self.PSF_eTOT_pix*self.arcsec_per_pixel
+        #self.PSF_e1_pix = np.array(self.tab['PSF_e1'])
+        #self.PSF_e2_pix = np.array(self.tab['PSF_e2'])
+        #self.PSF_eTOT_pix = np.sqrt(self.PSF_e1_pix**2+self.PSF_e2_pix**2)
+        #self.PSF_e1 = self.PSF_e1_pix*self.arcsec_per_pixel
+        #self.PSF_e2 = self.PSF_e2_pix*self.arcsec_per_pixel
+        #self.PSF_eTOT = self.PSF_eTOT_pix*self.arcsec_per_pixel
         
         '''PSF-e1, PSF-e2: means of the PSF model ellipticity components
           measured on each exposure. PSF ellipticities are derived from the
           PSF model at the location of each galaxy and are top-hat weighted
           with radius 8 pixels (1.496 arcsec)'''
         
-        self.PSF_Strehl_ratio = np.array(self.tab['PSF_Strehl_ratio'])
+        #self.PSF_Strehl_ratio = np.array(self.tab['PSF_Strehl_ratio'])
         self.scalelength = np.array(self.tab['scalelength'])
         self.scalelength_arcsec = np.array(self.scalelength*self.arcsec_per_pixel)
         
@@ -98,8 +98,10 @@ class CFHTLens:
         self.FWHM_IMAGE_arcsec = self.FWHM_IMAGE_pix*self.arcsec_per_pixel
         self.FWHM_WORLD_deg = np.array(self.tab['FWHM_WORLD']) #the same but degrees
         self.SEEING_from_FWHM = self.FWHM_IMAGE_arcsec*0.5 # sigma = 0.5 FWHM (for a bidimensional gaussian) 
-	self.MASK = np.array(self.tab['MASK'])
-	self.bulge_fraction = np.array(self.tab['bulge_fraction'])
+        self.MASK = np.array(self.tab['MASK'])
+        self.bulge_fraction = np.array(self.tab['bulge_fraction'])
+        self.A_WORLD = np.array(self.tab['A_WORLD'])
+        self.B_WORLD = np.array(self.tab['B_WORLD'])
         
     #useful functions    
     def get_tab(self):
@@ -265,6 +267,8 @@ class LENS_W3:
         self.scalelength = np.array(cfhtlens.scalelength[select_W3])
         self.scalelength_arcsec = np.array(self.scalelength*self.arcsec_per_pixel)
         self.bulge_fraction = np.array(cfhtlens.bulge_fraction[select_W3])
+        self.A_WORLD = np.array(cfhtlens.A_WORLD[select_W3])
+        self.B_WORLD = np.array(cfhtlens.B_WORLD[select_W3])
         print self.ra
     def get_cut(self,i_mag_cut=22.5):
         return np.where(self.MAG_i<=i_mag_cut)
