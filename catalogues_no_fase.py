@@ -100,9 +100,12 @@ class CFHTLens:
         self.SEEING_from_FWHM = self.FWHM_IMAGE_arcsec*0.5 # sigma = 0.5 FWHM (for a bidimensional gaussian) 
         self.MASK = np.array(self.tab['MASK'])
         self.bulge_fraction = np.array(self.tab['bulge_fraction'])
-        self.A_WORLD = np.array(self.tab['A_WORLD'])
-        self.B_WORLD = np.array(self.tab['B_WORLD'])
-        
+        self.A_WORLD = np.array(self.tab['A_WORLD']) # degree
+        self.B_WORLD = np.array(self.tab['B_WORLD']) # degree
+        self.A_WORLD_arcsec = np.array(self.tab['A_WORLD']*3600.) # arcsec
+        self.B_WORLD_arcsec = np.array(self.tab['B_WORLD']*3600.) # arcsec
+    
+    
     #useful functions    
     def get_tab(self):
         return self.tab
@@ -267,8 +270,12 @@ class LENS_W3:
         self.scalelength = np.array(cfhtlens.scalelength[select_W3])
         self.scalelength_arcsec = np.array(self.scalelength*self.arcsec_per_pixel)
         self.bulge_fraction = np.array(cfhtlens.bulge_fraction[select_W3])
-        self.A_WORLD = np.array(cfhtlens.A_WORLD[select_W3])
-        self.B_WORLD = np.array(cfhtlens.B_WORLD[select_W3])
+        self.A_WORLD = np.array(cfhtlens.A_WORLD[select_W3]) # degree
+        self.B_WORLD = np.array(cfhtlens.B_WORLD[select_W3]) # degree
+        self.A_WORLD_arcsec = np.array(cfhtlens.A_WORLD_arcsec[select_W3]) # arcsec
+        self.B_WORLD_arcsec = np.array(cfhtlens.B_WORLD_arcsec[select_W3]) # arcsec
+        self.fitclass = np.array(cfhtlens.fitclass[select_W3])
+
         print self.ra
     def get_cut(self,i_mag_cut=22.5):
         return np.where(self.MAG_i<=i_mag_cut)
