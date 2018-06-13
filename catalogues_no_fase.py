@@ -52,7 +52,7 @@ class CFHTLens:
         #self.tab = astro_read('../data/LENS_all_scalelength.csv',format='csv',guess=False,fast_reader=True)#={'chunk_size':100000000})
         #self.tab = pd.read_csv('../data/LENS_all_scalelength.csv')
         #self.tab = pd.read_csv('../data/LENS_all_bulge.csv')
-        self.tab = pd.read_csv('../data/LENS_total_light_AB.csv') # here I deleted some non-used psf columns
+        self.tab = pd.read_csv('../data/LENS_total_light_AB_Kron.csv') # here I deleted some non-used psf columns (but I left the Kron radius)
 
         #instantiate the properties I need
         self.ra = np.array(self.tab['ALPHA_J2000'])
@@ -63,6 +63,7 @@ class CFHTLens:
         self.FLUX_RADIUS = np.array(self.tab['FLUX_RADIUS'])
         self.arcsec_per_pixel = 0.187
         self.FLUX_RADIUS_arcsec = np.array(self.FLUX_RADIUS*self.arcsec_per_pixel)
+        self.KRON_RADIUS = np.array(self.tab['KRON_RADIUS'])
        
         self.fitclass = np.array(self.tab['fitclass'])
         self.CLASS_STAR = np.array(self.tab['CLASS_STAR'])
@@ -275,6 +276,7 @@ class LENS_W3:
         self.A_WORLD_arcsec = np.array(cfhtlens.A_WORLD_arcsec[select_W3]) # arcsec
         self.B_WORLD_arcsec = np.array(cfhtlens.B_WORLD_arcsec[select_W3]) # arcsec
         self.fitclass = np.array(cfhtlens.fitclass[select_W3])
+        self.KRON_RADIUS = np.array(cfhtlens.KRON_RADIUS[select_W3]) # no unit specified in the paper
 
         print self.ra
     def get_cut(self,i_mag_cut=22.5):
